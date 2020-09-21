@@ -1,3 +1,4 @@
+![CodeQL](https://github.com/Chema22R/minimal-jest-mock-console/workflows/CodeQL/badge.svg)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/Chema22R/minimal-jest-mock-console.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Chema22R/minimal-jest-mock-console/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/Chema22R/minimal-jest-mock-console.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/Chema22R/minimal-jest-mock-console/context:javascript)
 [![dependencies Status](https://david-dm.org/chema22r/minimal-jest-mock-console/status.svg)](https://david-dm.org/chema22r/minimal-jest-mock-console)
