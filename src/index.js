@@ -5,8 +5,10 @@ class MockConsole {
         this.originalConsole = { ...console };
         this.errors = { expected: regexList.length, handled: 0, matches: 0, unhandled: 0 };
 
-        jest.spyOn(console, level).mockImplementation((msg) => {
+        jest.spyOn(console, level).mockImplementation((msg, ...args) => {
             let match = false;
+
+            msg = msg.replace(/%s/g, () => args.splice(0, 1));
 
             regexList.forEach((regex) => {
                 if (regex.test(msg)) {
@@ -26,19 +28,19 @@ class MockConsole {
 
     expected(key, alt) {
         switch (key) {
-        case '':
-        case null:
-        case undefined:
-            return this.expected('errors', alt) && this.expected('handled', alt) && this.expected('matches', alt) && this.expected('unhandled', alt);
-        case 'errors':
-            return (this.errors.handled + this.errors.unhandled) === (alt >= 0 ? alt : this.errors.expected);
-        case 'handled':
-            return this.errors.handled === (alt >= 0 ? alt : this.errors.expected);
-        case 'matches':
-            return this.errors.matches === (alt >= 0 ? alt : this.errors.expected);
-        case 'unhandled':
-            return this.errors.unhandled === (alt >= 0 ? alt : 0);
-        default: return false;
+            case '':
+            case null:
+            case undefined:
+                return this.expected('errors', alt) && this.expected('handled', alt) && this.expected('matches', alt) && this.expected('unhandled', alt);
+            case 'errors':
+                return (this.errors.handled + this.errors.unhandled) === (alt >= 0 ? alt : this.errors.expected);
+            case 'handled':
+                return this.errors.handled === (alt >= 0 ? alt : this.errors.expected);
+            case 'matches':
+                return this.errors.matches === (alt >= 0 ? alt : this.errors.expected);
+            case 'unhandled':
+                return this.errors.unhandled === (alt >= 0 ? alt : 0);
+            default: return false;
         }
     }
 
