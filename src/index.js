@@ -10,12 +10,13 @@ class MockConsole {
 
             msg = msg.replace(/%s/g, () => args.splice(0, 1));
 
-            regexList.forEach((regex) => {
+            for (const regex of regexList) {
                 if (regex.test(msg)) {
                     match = true;
                     this.errors.matches += 1;
+                    break;
                 }
-            });
+            }
 
             if (match) {
                 this.errors.handled += 1;

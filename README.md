@@ -133,7 +133,7 @@ Let's see what is happening here:
 - `mockConsole.expected('handled')` returns `true` if the number of intercepted calls to `console.<level>` is equal to the length of the list of regular expressions (`regexList`). This is useful if we want to ensure each regex matches at least one error. If we specify one regex per expected error and one of them matches zero, the test suite will fail.
 - `mockConsole.expected('unhandled')` returns `true` if the number of non-intercepted calls to `console.<level>` is zero. This is useful to force the test suite to fail if there are unhandled errors (without this, console errors would be displayed but the test suite would pass like in the image above). This is equivalent to `expect(console.error).not.toBeCalled()`.
 - `mockConsole.expected('errors')` is a wrapper of the last two. This is useful using the second parameter (next example).
-- `mockConsole.expected()` is a wrapper of all these checks. This is recommended to check everything with just one line, but could be difficult to debug using only this. This is a good option for production, but not for development.
+- `mockConsole.expected()` is a wrapper of all these checks. This is recommended to check everything with just one line, but could be difficult to debug using only this. This is a good option for CI, but not for development.
 
 All the checks perform comparisons against the length of the list of regular expressions (`regexList`). If we have only one regex to only one expected error, this behavior is perfect, but, if not, some of these checks would be useless. To solve this, use the second argument to define the number against which to do the comparisons:
 
