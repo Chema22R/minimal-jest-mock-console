@@ -3,19 +3,32 @@
 class MockConsole {
     constructor(level = 'error', regexList = [/.*/u]) {
         this.originalConsole = { ...console };
+        this.msgs = [];
         this.errors = { expected: regexList.length, handled: 0, matches: 0, unhandled: 0 };
 
         jest.spyOn(console, level).mockImplementation((msg, ...args) => {
             let match = false;
+            let duplicate = false;
 
             msg = msg.replace(/%s/g, () => args.splice(0, 1));
 
             for (const regex of regexList) {
                 if (regex.test(msg)) {
+                    if (this.msgs.find((element) => regex.test(element))) {
+                        duplicate = true;
+                        break;
+                    }
+
                     match = true;
                     this.errors.matches += 1;
                     break;
                 }
+            }
+
+            this.msgs.push(msg);
+
+            if (duplicate) {
+                return;
             }
 
             if (match) {

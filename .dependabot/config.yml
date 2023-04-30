@@ -11,4 +11,4 @@ update_configs:
       - "dependencies"
     allowed_updates:
       - match:
-         update_type: "security"
+          update_type: "security"
